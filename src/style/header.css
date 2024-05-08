@@ -1,0 +1,19 @@
+.monIcon {
+    font-size: 2em; /* Taille par défaut */
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .monIcon {
+      font-size: 1em; /* Taille réduite pour les écrans de petite taille */
+    }
+  }
+  
+
+  
+  @media only screen and (max-width: 600px) {
+    .monSwitch {
+      position: absolute;
+      left: 0;
+    }
+  }
+  

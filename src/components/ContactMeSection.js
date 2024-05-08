@@ -16,6 +16,7 @@ import * as Yup from 'yup';
 import FullScreenSection from "./FullScreenSection"; 
 import useSubmit from "../hooks/useSubmit"; 
 import {useAlertContext} from "../context/alertContext"; 
+import { useTheme } from '../context/ThemeContext';
  
 /** 
 * Covers a complete form implementation using formik and yup for validation 
@@ -23,6 +24,11 @@ import {useAlertContext} from "../context/alertContext";
 const ContactMeSection = () => { 
  const {isLoading, response, submit} = useSubmit(); 
  const { onOpen } = useAlertContext(); 
+ const { theme, toggleTheme } = useTheme();
+ const headerStyle = {
+  backgroundColor: theme === 'light' ? '#e6e6e6' : 'black',
+  color: theme === 'light' ? 'black' : 'white',
+};
  
  const formik = useFormik({ 
    initialValues: { 
@@ -54,21 +60,23 @@ const ContactMeSection = () => {
  
  return ( 
    <FullScreenSection 
-     isDarkBackground 
-     backgroundColor="#512DA8" 
+
+   style={headerStyle}
      py={16} 
      spacing={8} 
    > 
-     <VStack w="1024px" p={32} alignItems="flex-start"> 
+     <VStack  p={32} alignItems="flex-start"  w={{ base: "600px", md: "1024px" }}> 
        <Heading as="h1" id="contactme-section"> 
          Contact me 
        </Heading> 
-       <Box p={6} rounded="md" w="100%"> 
+       <Box  boxShadow={theme == 'light' ? "0 10px 20px rgba(0, 0, 0, 0.25)": "0 10px 15px rgba(255, 255, 255, 0.3)"}
+    p={6} rounded="md"   ml={{ base: "200px", md: "0px" }}   w="100%" bg={ theme === 'light' ? 'white' : '#333333'}>
          <form onSubmit={formik.handleSubmit}> 
            <VStack spacing={4}> 
              <FormControl isInvalid={!!formik.errors.firstName && formik.touched.firstName}> 
                <FormLabel htmlFor="firstName">Name</FormLabel> 
                <Input 
+               bg={theme === 'light' ? 'white' : 'black'}
                  id="firstName" 
                  name="firstName" 
                  {...formik.getFieldProps("firstName")} 
@@ -78,6 +86,7 @@ const ContactMeSection = () => {
              <FormControl isInvalid={!!formik.errors.email && formik.touched.email}> 
                <FormLabel htmlFor="email">Email Address</FormLabel> 
                <Input 
+                 bg={theme === 'light' ? 'white' : 'black'}
                  id="email" 
                  name="email" 
                  type="email" 
@@ -87,7 +96,7 @@ const ContactMeSection = () => {
              </FormControl> 
              <FormControl> 
                <FormLabel htmlFor="type">Type of enquiry</FormLabel> 
-               <Select id="type" name="type" {...formik.getFieldProps("type")}> 
+               <Select id="type" name="type" {...formik.getFieldProps("type")}     bg={theme === 'light' ? 'white' : 'black'}> 
                  <option value="hireMe">Freelance project proposal</option> 
                  <option value="openSource"> 
                    Open source consultancy session 
@@ -98,6 +107,7 @@ const ContactMeSection = () => {
              <FormControl isInvalid={!!formik.errors.comment && formik.touched.comment}> 
                <FormLabel htmlFor="comment">Your message</FormLabel> 
                <Textarea 
+                 bg={theme === 'light' ? 'white' : 'black'}
                  id="comment" 
                  name="comment" 
                  height={250} 

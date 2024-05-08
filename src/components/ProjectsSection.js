@@ -1,9 +1,10 @@
 import React from "react"; 
 import FullScreenSection from "./FullScreenSection"; 
-import { Box, Heading } from "@chakra-ui/react"; 
+import { Box, Heading ,Text} from "@chakra-ui/react"; 
 import Card from "./Card"; 
- 
+import { useTheme } from '../context/ThemeContext';
 const projects = [ 
+  
  { 
    title: "React Space", 
    description: 
@@ -31,22 +32,29 @@ const projects = [
 ]; 
  
 const ProjectsSection = () => { 
+  const { theme, toggleTheme } = useTheme();
+  const headerStyle = {
+    backgroundColor: theme === 'light' ? '#e6e6e6' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  };
  return ( 
    <FullScreenSection 
-     backgroundColor="#14532d" 
-     isDarkBackground 
+   style={headerStyle}
      p={8} 
      alignItems="flex-start" 
      spacing={8} 
    > 
      <Heading as="h1" id="projects-section"> 
        Featured Projects 
-     </Heading> 
-     <Box 
-       display="grid" 
-       gridTemplateColumns="repeat(2,minmax(0,1fr))" 
-       gridGap={8} 
-     > 
+     </Heading>
+     <Text color="#64748b" fontSize="lg">
+            Voici les projet personnel que j'ai créér;
+          </Text>
+    <Box
+    display={{ base: "grid", md: "grid" }}
+    gridTemplateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+    gridGap={8}
+  >
        {projects.map((project) => ( 
          <Card 
            key={project.title} 

@@ -1,0 +1,14 @@
+.btn-white-cv{
+    border: 4px solid blue;
+    background-color: beige;
+    border-radius: 15px;
+    padding: 6px;
+}
+
+.btn-dark-cv{
+    border: 4px solid blue;
+    background-color: rgb(32, 32, 29);
+    color: white;
+    border-radius: 15px;
+    padding: 6px;
+}
